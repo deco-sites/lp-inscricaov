@@ -22,8 +22,7 @@
         "labelName": "Nome completo",
         "footerText2": "Seu jornal diário do mundi digital",
         "footerText1": "© 2025 Primeira Conversão. Todos os direitos reservados.",
-        "googleSheetsWebhook": "https://script.google.com/macros/s/AKfycbwy2fvXpTBuR1InjjT2eiweGNERMcFyfj_cw8N4MQAsWdyr_Y0O1sGNey_IQ9nNJkQ_/exec",
-        "logo": "https://assets.decocache.com/lp-inscricaov/afc46c02-0553-4c9b-96ec-6abf8727edb3/1.png"
+        "googleSheetsWebhook": "https://script.google.com/macros/s/AKfycbwy2fvXpTBuR1InjjT2eiweGNERMcFyfj_cw8N4MQAsWdyr_Y0O1sGNey_IQ9nNJkQ_/exec"
       }
     }
   ],
