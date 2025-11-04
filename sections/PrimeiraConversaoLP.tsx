@@ -301,7 +301,7 @@ export default function PrimeiraConversaoLP({
               class="inline-flex items-center hover:opacity-80 transition"
             >
               <img 
-                src="https://cdn.prod.website-files.com/6526a00fbfb681da0e87743b/6526ab3ba6aaac4ad817286e_Vector.svg" 
+                src="https://assets.decocache.com/lp-inscricaov/5e5e980b-f3a4-48d0-acad-60107f308885/branco-tec.png" 
                 alt="TEC4U" 
                 class="h-4"
               />
