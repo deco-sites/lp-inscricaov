@@ -5,7 +5,9 @@
     {
       "__resolveType": "website/sections/Rendering/Lazy.tsx",
       "section": {
-        "__resolveType": "site/sections/PrimeiraConversaoLP.tsx"
+        "__resolveType": "site/sections/PrimeiraConversaoLP.tsx",
+        "googleSheetsWebhook": "https://script.google.com/macros/s/AKfycbzZLefXKuAQcciAIvMNczY3SYeUvqFPVSoKyg6Pd5Y9iO3ZArE_XCLRTM6OT_7DtJAv-A/exec",
+        "spotifyLink": "https://open.spotify.com/show/4WDU2353Vy8BSBU2C9uSyZ"
       }
     }
   ],
