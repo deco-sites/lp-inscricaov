@@ -1,6 +1,4 @@
 import { useSection } from "@deco/deco/hooks";
-import type { ImageWidget } from "apps/admin/widgets.ts";
-import { invoke } from "../runtime.ts";
 
 export interface Props {
   /** @title Título Principal (parte 1) */
@@ -81,8 +79,8 @@ export interface Props {
   /** @title Texto do Footer (linha 2) */
   footerText2?: string;
   
-  /** @title URL do Google Sheets Webhook (opcional) */
-  /** @description Se preenchido, também enviará os dados para o Google Sheets */
+  /** @title URL do Google Sheets Webhook */
+  /** @description Cole aqui a URL do Google Apps Script Web App */
   googleSheetsWebhook?: string;
 }
 
@@ -114,7 +112,6 @@ export default function PrimeiraConversaoLP(props: Props) {
     spotifyLink = "https://open.spotify.com/",
     footerText1 = "© 2025 Primeira Conversão. Todos os direitos reservados.",
     footerText2 = "Seu jornal diário do mundo digital • Das úteis às 04h",
-    googleSheetsWebhook = "",
   } = props;
 
   return (
@@ -213,7 +210,7 @@ export default function PrimeiraConversaoLP(props: Props) {
 
             <form
               class="space-y-5"
-              hx-post={useSection({ props })}
+              hx-post={useSection({})}
               hx-swap="outerHTML"
               hx-target="closest form"
             >
@@ -348,51 +345,88 @@ export const action = async (props: Props, req: Request) => {
   const email = form.get("email")?.toString() || "";
   const whatsapp = form.get("whatsapp")?.toString() || "";
   const terms = form.get("terms")?.toString() || "";
+  const timestamp = new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
 
-  console.log("=== PROCESSANDO INSCRIÇÃO ===");
+  console.log("=== DADOS DO FORMULÁRIO (NÃO EXPOSTOS NA URL) ===");
   console.log("📝 Nome:", name);
   console.log("📝 Email:", email);
   console.log("📝 WhatsApp:", whatsapp);
   console.log("📝 Termos:", terms);
+  console.log("🕐 Timestamp:", timestamp);
 
+  // Validação
+  if (!name || !email || !whatsapp) {
+    console.error("❌ Campos vazios");
+    return (
+      <div class="bg-red-500/10 border-2 border-red-500/30 rounded-2xl p-10 text-center space-y-4">
+        <svg class="w-20 h-20 text-red-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <h3 class="text-3xl font-bold text-white">Erro</h3>
+        <p class="text-gray-300">Preencha todos os campos obrigatórios</p>
+        <button
+          onclick="window.location.reload()"
+          class="mt-6 bg-red-400 hover:bg-red-500 text-white font-bold py-3 px-8 rounded-lg transition"
+        >
+          Tentar Novamente
+        </button>
+      </div>
+    );
+  }
+
+  if (!props.googleSheetsWebhook) {
+    console.error("❌ Webhook não configurado no Admin");
+    return (
+      <div class="bg-red-500/10 border-2 border-red-500/30 rounded-2xl p-10 text-center space-y-4">
+        <svg class="w-20 h-20 text-red-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <h3 class="text-3xl font-bold text-white">Configuração Pendente</h3>
+        <p class="text-gray-300">URL do Google Sheets não configurada no Admin</p>
+        <button
+          onclick="window.location.reload()"
+          class="mt-6 bg-red-400 hover:bg-red-500 text-white font-bold py-3 px-8 rounded-lg transition"
+        >
+          Voltar
+        </button>
+      </div>
+    );
+  }
+
+  // Envia para Google Sheets
   try {
-    // Salva usando a Action (mais seguro, sem passar dados via URL)
-    const result = await invoke["site"].actions.saveNewsletterSubscription({
+    console.log("📤 Enviando para Google Sheets...");
+    console.log("🔗 URL:", props.googleSheetsWebhook);
+    
+    const payload = {
       name,
       email,
       whatsapp,
-      terms,
+      terms: terms === "accepted" ? "Sim" : "Não",
+      timestamp,
+    };
+    
+    console.log("📦 Payload:", JSON.stringify(payload, null, 2));
+    
+    const response = await fetch(props.googleSheetsWebhook, {
+      method: "POST",
+      redirect: "follow",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
     });
 
-    console.log("🔍 Resultado da Action:", result);
+    console.log("📡 Status HTTP:", response.status);
+    console.log("📡 Status Text:", response.statusText);
 
-    // Se tiver webhook do Google Sheets configurado, envia também
-    if (props.googleSheetsWebhook && result.success) {
-      console.log("📤 Enviando também para Google Sheets...");
-      try {
-        const timestamp = new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
-        const payload = {
-          name,
-          email,
-          whatsapp,
-          terms: terms === "accepted" ? "Sim" : "Não",
-          timestamp,
-        };
-        
-        await fetch(props.googleSheetsWebhook, {
-          method: "POST",
-          redirect: "follow",
-          headers: { "Content-Type": "text/plain;charset=utf-8" },
-          body: JSON.stringify(payload),
-        });
-        
-        console.log("✅ Enviado para Google Sheets");
-      } catch (err) {
-        console.error("⚠️ Erro ao enviar para Google Sheets (mas dados foram salvos):", err);
-      }
-    }
+    const responseText = await response.text();
+    console.log("📄 Resposta completa:", responseText);
 
-    if (result.success) {
+    // Google Apps Script retorna 200 ou 302
+    if (response.status === 200 || response.status === 302 || response.ok) {
+      console.log("✅ SUCESSO! Dados salvos na planilha");
+      
       return (
         <div class="bg-emerald-500/10 border-2 border-emerald-500/30 rounded-2xl p-10 text-center space-y-4">
           <svg class="w-20 h-20 text-emerald-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -416,39 +450,33 @@ export const action = async (props: Props, req: Request) => {
         </div>
       );
     } else {
-      return (
-        <div class="bg-red-500/10 border-2 border-red-500/30 rounded-2xl p-10 text-center space-y-4">
-          <svg class="w-20 h-20 text-red-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          <h3 class="text-3xl font-bold text-white">
-            Erro na inscrição
-          </h3>
-          <p class="text-gray-300 text-lg">
-            {result.message}
-          </p>
-          <button
-            onclick="window.location.reload()"
-            class="mt-6 bg-red-400 hover:bg-red-500 text-white font-bold py-3 px-8 rounded-lg transition"
-          >
-            Tentar Novamente
-          </button>
-        </div>
-      );
+      console.error("❌ Erro HTTP:", response.status);
+      throw new Error(`HTTP ${response.status}: ${responseText}`);
     }
+    
   } catch (error) {
-    console.error("❌ Erro:", error);
+    console.error("❌ ERRO AO ENVIAR:", error);
+    console.error("Stack:", error instanceof Error ? error.stack : "N/A");
+    
     return (
       <div class="bg-red-500/10 border-2 border-red-500/30 rounded-2xl p-10 text-center space-y-4">
         <svg class="w-20 h-20 text-red-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
         </svg>
         <h3 class="text-3xl font-bold text-white">
-          Erro no sistema
+          Erro no envio
         </h3>
         <p class="text-gray-300">
-          Ocorreu um erro ao processar sua inscrição. Tente novamente.
+          {error instanceof Error ? error.message : "Erro ao enviar dados"}
         </p>
+        <div class="text-left bg-gray-900/50 p-4 rounded-lg text-xs text-gray-400 max-w-md mx-auto">
+          <p class="font-bold mb-2 text-emerald-400">✅ Dados capturados (veja no console F12):</p>
+          <p>Nome: {name}</p>
+          <p>Email: {email}</p>
+          <p>WhatsApp: {whatsapp}</p>
+          <p>Timestamp: {timestamp}</p>
+          <p class="mt-2 text-red-400">❌ Erro: {error instanceof Error ? error.message : "Desconhecido"}</p>
+        </div>
         <button
           onclick="window.location.reload()"
           class="mt-6 bg-red-400 hover:bg-red-500 text-white font-bold py-3 px-8 rounded-lg transition"
