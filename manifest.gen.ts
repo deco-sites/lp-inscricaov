@@ -3,6 +3,7 @@
 // This file is automatically updated during development when running `dev.ts`.
 
 import * as $$$$$$$$$0 from "./actions/saveNewsletterSubscription.ts";
+import * as $$$$$$$$$1 from "./actions/submitNewsletter.ts";
 import * as $$$$$$$$$$$0 from "./apps/deco/htmx.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
 import * as $$$$$$0 from "./sections/Footer.tsx";
@@ -21,6 +22,7 @@ const manifest = {
   },
   "actions": {
     "site/actions/saveNewsletterSubscription.ts": $$$$$$$$$0,
+    "site/actions/submitNewsletter.ts": $$$$$$$$$1,
   },
   "apps": {
     "site/apps/deco/htmx.ts": $$$$$$$$$$$0,

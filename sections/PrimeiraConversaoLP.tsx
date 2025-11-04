@@ -1,4 +1,4 @@
-import { useSection } from "@deco/deco/hooks";
+import NewsletterForm from "../islands/NewsletterForm.tsx";
 
 export interface Props {
   /** @title Título Principal (parte 1) */
@@ -84,36 +84,35 @@ export interface Props {
   googleSheetsWebhook?: string;
 }
 
-export default function PrimeiraConversaoLP(props: Props) {
-  const {
-    titlePart1 = "PRIMEIRA",
-    titlePart2 = "CONVERSÃO",
-    subtitle = "Seu jornal diário do mundo digital",
-    subText = "Todo dia útil às 04h00 na sua caixa de entrada",
-    card1Title = "Todo dia às 04h",
-    card1Description = "Comece o dia informado com as principais notícias",
-    card2Title = "Podcast 5 minutos",
-    card2Description = "Ouça no Spotify enquanto se prepara para o dia",
-    card3Title = "Newsletter diária",
-    card3Description = "Receba diretamente no seu e-mail",
-    formTitle = "Receba a newsletter",
-    formSubtitle = "Cadastre-se gratuitamente e fique por dentro do mundo digital",
-    labelName = "Nome completo",
-    placeholderName = "Seu nome",
-    labelEmail = "E-mail",
-    placeholderEmail = "seu@email.com",
-    labelWhatsApp = "WhatsApp",
-    placeholderWhatsApp = "(00) 00000-0000",
-    radioText = "Aceito receber comunicações do Primeira Conversão e seus parceiros via e-mail e WhatsApp",
-    buttonText = "Quero receber a newsletter",
-    spotifyTitle = "Também disponível no Spotify",
-    spotifyDescription = "Ouça o podcast diário de 5 minutos com as principais notícias",
-    spotifyButtonText = "Ouvir no Spotify",
-    spotifyLink = "https://open.spotify.com/",
-    footerText1 = "© 2025 Primeira Conversão. Todos os direitos reservados.",
-    footerText2 = "Seu jornal diário do mundo digital • Das úteis às 04h",
-  } = props;
-
+export default function PrimeiraConversaoLP({
+  titlePart1 = "PRIMEIRA",
+  titlePart2 = "CONVERSÃO",
+  subtitle = "Seu jornal diário do mundo digital",
+  subText = "Todo dia útil às 04h00 na sua caixa de entrada",
+  card1Title = "Todo dia às 04h",
+  card1Description = "Comece o dia informado com as principais notícias",
+  card2Title = "Podcast 5 minutos",
+  card2Description = "Ouça no Spotify enquanto se prepara para o dia",
+  card3Title = "Newsletter diária",
+  card3Description = "Receba diretamente no seu e-mail",
+  formTitle = "Receba a newsletter",
+  formSubtitle = "Cadastre-se gratuitamente e fique por dentro do mundo digital",
+  labelName = "Nome completo",
+  placeholderName = "Seu nome",
+  labelEmail = "E-mail",
+  placeholderEmail = "seu@email.com",
+  labelWhatsApp = "WhatsApp",
+  placeholderWhatsApp = "(00) 00000-0000",
+  radioText = "Aceito receber comunicações do Primeira Conversão e seus parceiros via e-mail e WhatsApp",
+  buttonText = "Quero receber a newsletter",
+  spotifyTitle = "Também disponível no Spotify",
+  spotifyDescription = "Ouça o podcast diário de 5 minutos com as principais notícias",
+  spotifyButtonText = "Ouvir no Spotify",
+  spotifyLink = "https://open.spotify.com/",
+  footerText1 = "© 2025 Primeira Conversão. Todos os direitos reservados.",
+  footerText2 = "Seu jornal diário do mundo digital • Das úteis às 04h",
+  googleSheetsWebhook = "",
+}: Props) {
   return (
     <div class="min-h-screen bg-[#0d1117] text-white">
       {/* Header */}
@@ -208,80 +207,18 @@ export default function PrimeiraConversaoLP(props: Props) {
               </p>
             </div>
 
-            <form
-              class="space-y-5"
-              hx-post={useSection({})}
-              hx-swap="outerHTML"
-              hx-target="closest form"
-            >
-              {/* Nome Completo */}
-              <div>
-                <label for="name" class="block text-sm font-semibold mb-2 text-white">
-                  {labelName}
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  placeholder={placeholderName}
-                  class="w-full px-4 py-3 bg-[#0d1117] border border-gray-700 rounded-lg focus:ring-2 focus:ring-[#4ade80] focus:border-[#4ade80] outline-none transition text-white placeholder-gray-500"
-                />
-              </div>
-
-              {/* E-mail */}
-              <div>
-                <label for="email" class="block text-sm font-semibold mb-2 text-white">
-                  {labelEmail}
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  placeholder={placeholderEmail}
-                  class="w-full px-4 py-3 bg-[#0d1117] border border-gray-700 rounded-lg focus:ring-2 focus:ring-[#4ade80] focus:border-[#4ade80] outline-none transition text-white placeholder-gray-500"
-                />
-              </div>
-
-              {/* WhatsApp */}
-              <div>
-                <label for="whatsapp" class="block text-sm font-semibold mb-2 text-white">
-                  {labelWhatsApp}
-                </label>
-                <input
-                  type="tel"
-                  id="whatsapp"
-                  name="whatsapp"
-                  required
-                  placeholder={placeholderWhatsApp}
-                  class="w-full px-4 py-3 bg-[#0d1117] border border-gray-700 rounded-lg focus:ring-2 focus:ring-[#4ade80] focus:border-[#4ade80] outline-none transition text-white placeholder-gray-500"
-                />
-              </div>
-
-              {/* Radio Button de Aceite */}
-              <div class="flex items-start gap-3 pt-2">
-                <input
-                  type="radio"
-                  id="terms"
-                  name="terms"
-                  value="accepted"
-                  required
-                  class="mt-0.5 w-4 h-4 border-gray-600 bg-transparent text-[#4ade80] focus:ring-[#4ade80] cursor-pointer"
-                />
-                <label for="terms" class="text-sm text-gray-300 leading-relaxed cursor-pointer">
-                  {radioText}
-                </label>
-              </div>
-
-              {/* Submit Button */}
-              <button
-                type="submit"
-                class="w-full bg-[#4ade80] hover:bg-[#3cc76e] text-gray-900 font-bold py-4 px-6 rounded-lg transition duration-200 mt-6"
-              >
-                {buttonText}
-              </button>
-            </form>
+            {/* Island - Formulário Interativo (NÃO expõe dados na URL) */}
+            <NewsletterForm
+              labelName={labelName}
+              placeholderName={placeholderName}
+              labelEmail={labelEmail}
+              placeholderEmail={placeholderEmail}
+              labelWhatsApp={labelWhatsApp}
+              placeholderWhatsApp={placeholderWhatsApp}
+              radioText={radioText}
+              buttonText={buttonText}
+              webhookUrl={googleSheetsWebhook}
+            />
           </div>
         </div>
       </section>
@@ -337,153 +274,3 @@ export default function PrimeiraConversaoLP(props: Props) {
     </div>
   );
 }
-
-export const action = async (props: Props, req: Request) => {
-  const form = await req.formData();
-  
-  const name = form.get("name")?.toString() || "";
-  const email = form.get("email")?.toString() || "";
-  const whatsapp = form.get("whatsapp")?.toString() || "";
-  const terms = form.get("terms")?.toString() || "";
-  const timestamp = new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
-
-  console.log("=== DADOS DO FORMULÁRIO (NÃO EXPOSTOS NA URL) ===");
-  console.log("📝 Nome:", name);
-  console.log("📝 Email:", email);
-  console.log("📝 WhatsApp:", whatsapp);
-  console.log("📝 Termos:", terms);
-  console.log("🕐 Timestamp:", timestamp);
-
-  // Validação
-  if (!name || !email || !whatsapp) {
-    console.error("❌ Campos vazios");
-    return (
-      <div class="bg-red-500/10 border-2 border-red-500/30 rounded-2xl p-10 text-center space-y-4">
-        <svg class="w-20 h-20 text-red-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-        </svg>
-        <h3 class="text-3xl font-bold text-white">Erro</h3>
-        <p class="text-gray-300">Preencha todos os campos obrigatórios</p>
-        <button
-          onclick="window.location.reload()"
-          class="mt-6 bg-red-400 hover:bg-red-500 text-white font-bold py-3 px-8 rounded-lg transition"
-        >
-          Tentar Novamente
-        </button>
-      </div>
-    );
-  }
-
-  if (!props.googleSheetsWebhook) {
-    console.error("❌ Webhook não configurado no Admin");
-    return (
-      <div class="bg-red-500/10 border-2 border-red-500/30 rounded-2xl p-10 text-center space-y-4">
-        <svg class="w-20 h-20 text-red-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-        </svg>
-        <h3 class="text-3xl font-bold text-white">Configuração Pendente</h3>
-        <p class="text-gray-300">URL do Google Sheets não configurada no Admin</p>
-        <button
-          onclick="window.location.reload()"
-          class="mt-6 bg-red-400 hover:bg-red-500 text-white font-bold py-3 px-8 rounded-lg transition"
-        >
-          Voltar
-        </button>
-      </div>
-    );
-  }
-
-  // Envia para Google Sheets
-  try {
-    console.log("📤 Enviando para Google Sheets...");
-    console.log("🔗 URL:", props.googleSheetsWebhook);
-    
-    const payload = {
-      name,
-      email,
-      whatsapp,
-      terms: terms === "accepted" ? "Sim" : "Não",
-      timestamp,
-    };
-    
-    console.log("📦 Payload:", JSON.stringify(payload, null, 2));
-    
-    const response = await fetch(props.googleSheetsWebhook, {
-      method: "POST",
-      redirect: "follow",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
-
-    console.log("📡 Status HTTP:", response.status);
-    console.log("📡 Status Text:", response.statusText);
-
-    const responseText = await response.text();
-    console.log("📄 Resposta completa:", responseText);
-
-    // Google Apps Script retorna 200 ou 302
-    if (response.status === 200 || response.status === 302 || response.ok) {
-      console.log("✅ SUCESSO! Dados salvos na planilha");
-      
-      return (
-        <div class="bg-emerald-500/10 border-2 border-emerald-500/30 rounded-2xl p-10 text-center space-y-4">
-          <svg class="w-20 h-20 text-emerald-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          <h3 class="text-3xl font-bold text-white">
-            Inscrição confirmada!
-          </h3>
-          <p class="text-gray-300 text-lg">
-            Você receberá nossa newsletter diária às 04h no seu e-mail.
-          </p>
-          <p class="text-gray-400">
-            Bem-vindo(a) ao Primeira Conversão! 🎉
-          </p>
-          <button
-            onclick="window.location.reload()"
-            class="mt-6 bg-emerald-400 hover:bg-emerald-500 text-gray-900 font-bold py-3 px-8 rounded-lg transition"
-          >
-            Fazer Nova Inscrição
-          </button>
-        </div>
-      );
-    } else {
-      console.error("❌ Erro HTTP:", response.status);
-      throw new Error(`HTTP ${response.status}: ${responseText}`);
-    }
-    
-  } catch (error) {
-    console.error("❌ ERRO AO ENVIAR:", error);
-    console.error("Stack:", error instanceof Error ? error.stack : "N/A");
-    
-    return (
-      <div class="bg-red-500/10 border-2 border-red-500/30 rounded-2xl p-10 text-center space-y-4">
-        <svg class="w-20 h-20 text-red-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-        </svg>
-        <h3 class="text-3xl font-bold text-white">
-          Erro no envio
-        </h3>
-        <p class="text-gray-300">
-          {error instanceof Error ? error.message : "Erro ao enviar dados"}
-        </p>
-        <div class="text-left bg-gray-900/50 p-4 rounded-lg text-xs text-gray-400 max-w-md mx-auto">
-          <p class="font-bold mb-2 text-emerald-400">✅ Dados capturados (veja no console F12):</p>
-          <p>Nome: {name}</p>
-          <p>Email: {email}</p>
-          <p>WhatsApp: {whatsapp}</p>
-          <p>Timestamp: {timestamp}</p>
-          <p class="mt-2 text-red-400">❌ Erro: {error instanceof Error ? error.message : "Desconhecido"}</p>
-        </div>
-        <button
-          onclick="window.location.reload()"
-          class="mt-6 bg-red-400 hover:bg-red-500 text-white font-bold py-3 px-8 rounded-lg transition"
-        >
-          Tentar Novamente
-        </button>
-      </div>
-    );
-  }
-};
