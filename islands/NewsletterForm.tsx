@@ -11,6 +11,12 @@ export interface NewsletterFormProps {
   radioText: string;
   buttonText: string;
   webhookUrl: string;
+  successTitle: string;
+  successDescription: string;
+  successMessage: string;
+  successButtonText: string;
+  errorTitle: string;
+  errorButtonText: string;
 }
 
 export default function NewsletterForm(props: NewsletterFormProps) {
@@ -64,6 +70,7 @@ export default function NewsletterForm(props: NewsletterFormProps) {
     }
   };
 
+  // Tela de Sucesso
   if (success) {
     return (
       <div class="bg-emerald-500/10 border-2 border-emerald-500/30 rounded-2xl p-10 text-center space-y-4">
@@ -71,24 +78,25 @@ export default function NewsletterForm(props: NewsletterFormProps) {
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
         </svg>
         <h3 class="text-3xl font-bold text-white">
-          Inscrição confirmada!
+          {props.successTitle}
         </h3>
         <p class="text-gray-300 text-lg">
-          Você receberá nossa newsletter diária às 04h no seu e-mail.
+          {props.successDescription}
         </p>
         <p class="text-gray-400">
-          Bem-vindo(a) ao Primeira Conversão! 🎉
+          {props.successMessage}
         </p>
         <button
           onClick={() => setSuccess(false)}
           class="mt-6 bg-emerald-400 hover:bg-emerald-500 text-gray-900 font-bold py-3 px-8 rounded-lg transition"
         >
-          Fazer Nova Inscrição
+          {props.successButtonText}
         </button>
       </div>
     );
   }
 
+  // Formulário
   return (
     <form onSubmit={handleSubmit} class="space-y-5">
       {/* Nome Completo */}
@@ -153,8 +161,23 @@ export default function NewsletterForm(props: NewsletterFormProps) {
 
       {/* Mensagem de Erro */}
       {error && (
-        <div class="bg-red-500/10 border border-red-500/30 rounded-lg p-4 text-red-300 text-sm">
-          ❌ {error}
+        <div class="bg-red-500/10 border-2 border-red-500/30 rounded-2xl p-6 text-center">
+          <svg class="w-16 h-16 text-red-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <h3 class="text-xl font-bold text-white mb-2">
+            {props.errorTitle}
+          </h3>
+          <p class="text-red-300 text-sm mb-4">
+            {error}
+          </p>
+          <button
+            type="button"
+            onClick={() => setError("")}
+            class="bg-red-400 hover:bg-red-500 text-white font-bold py-2 px-6 rounded-lg transition"
+          >
+            {props.errorButtonText}
+          </button>
         </div>
       )}
 

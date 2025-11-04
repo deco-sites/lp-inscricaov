@@ -1,6 +1,11 @@
 import NewsletterForm from "../islands/NewsletterForm.tsx";
+import type { ImageWidget } from "apps/admin/widgets.ts";
 
 export interface Props {
+  /** @title Logo/Imagem do Topo */
+  /** @description Imagem que aparece no topo da página (opcional - se não preencher, mostra ícone padrão) */
+  logo?: ImageWidget;
+  
   /** @title Título Principal (parte 1) */
   titlePart1?: string;
   
@@ -61,6 +66,24 @@ export interface Props {
   /** @title Texto do Botão */
   buttonText?: string;
   
+  /** @title Mensagem de Sucesso - Título */
+  successTitle?: string;
+  
+  /** @title Mensagem de Sucesso - Descrição */
+  successDescription?: string;
+  
+  /** @title Mensagem de Sucesso - Mensagem Final */
+  successMessage?: string;
+  
+  /** @title Mensagem de Sucesso - Texto do Botão */
+  successButtonText?: string;
+  
+  /** @title Mensagem de Erro - Título */
+  errorTitle?: string;
+  
+  /** @title Mensagem de Erro - Texto do Botão */
+  errorButtonText?: string;
+  
   /** @title Título da Seção Spotify */
   spotifyTitle?: string;
   
@@ -85,6 +108,7 @@ export interface Props {
 }
 
 export default function PrimeiraConversaoLP({
+  logo,
   titlePart1 = "PRIMEIRA",
   titlePart2 = "CONVERSÃO",
   subtitle = "Seu jornal diário do mundo digital",
@@ -105,6 +129,12 @@ export default function PrimeiraConversaoLP({
   placeholderWhatsApp = "(00) 00000-0000",
   radioText = "Aceito receber comunicações do Primeira Conversão e seus parceiros via e-mail e WhatsApp",
   buttonText = "Quero receber a newsletter",
+  successTitle = "Inscrição confirmada!",
+  successDescription = "Você receberá nossa newsletter diária às 04h no seu e-mail.",
+  successMessage = "Bem-vindo(a) ao Primeira Conversão! 🎉",
+  successButtonText = "Fazer Nova Inscrição",
+  errorTitle = "Erro ao processar inscrição",
+  errorButtonText = "Tentar Novamente",
   spotifyTitle = "Também disponível no Spotify",
   spotifyDescription = "Ouça o podcast diário de 5 minutos com as principais notícias",
   spotifyButtonText = "Ouvir no Spotify",
@@ -119,9 +149,17 @@ export default function PrimeiraConversaoLP({
       <header class="pt-12 pb-8">
         <div class="container mx-auto px-4 flex justify-center">
           <div class="w-20 h-20 bg-emerald-600/20 rounded-full flex items-center justify-center">
-            <svg class="w-10 h-10 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
-            </svg>
+            {logo ? (
+              <img 
+                src={logo} 
+                alt="Logo" 
+                class="w-16 h-16 object-contain"
+              />
+            ) : (
+              <svg class="w-10 h-10 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+              </svg>
+            )}
           </div>
         </div>
       </header>
@@ -218,6 +256,12 @@ export default function PrimeiraConversaoLP({
               radioText={radioText}
               buttonText={buttonText}
               webhookUrl={googleSheetsWebhook}
+              successTitle={successTitle}
+              successDescription={successDescription}
+              successMessage={successMessage}
+              successButtonText={successButtonText}
+              errorTitle={errorTitle}
+              errorButtonText={errorButtonText}
             />
           </div>
         </div>
