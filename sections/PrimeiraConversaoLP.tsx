@@ -3,7 +3,7 @@ import type { ImageWidget } from "apps/admin/widgets.ts";
 
 export interface Props {
   /** @title Logo/Imagem do Topo */
-  /** @description Imagem que aparece no topo da página (opcional - se não preencher, mostra ícone padrão) */
+  /** @description Imagem que aparece no topo da página */
   logo?: ImageWidget;
   
   /** @title Título Principal (parte 1) */
@@ -148,19 +148,13 @@ export default function PrimeiraConversaoLP({
       {/* Header */}
       <header class="pt-12 pb-8">
         <div class="container mx-auto px-4 flex justify-center">
-          <div class="w-20 h-20 bg-emerald-600/20 rounded-full flex items-center justify-center">
-            {logo ? (
-              <img 
-                src={logo} 
-                alt="Logo" 
-                class="w-30 h-30 object-contain"
-              />
-            ) : (
-              <svg class="w-10 h-10 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
-              </svg>
-            )}
-          </div>
+          {logo && (
+            <img 
+              src={logo} 
+              alt="Logo" 
+              class="w-32 h-32 object-contain"
+            />
+          )}
         </div>
       </header>
 
