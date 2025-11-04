@@ -9,6 +9,12 @@
     },
     {
       "__resolveType": "Footer"
+    },
+    {
+      "__resolveType": "website/sections/Rendering/Lazy.tsx",
+      "section": {
+        "__resolveType": "site/sections/PrimeiraConversaoLP.tsx"
+      }
     }
   ],
   "__resolveType": "website/pages/Page.tsx"
