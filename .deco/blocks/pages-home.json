@@ -6,7 +6,7 @@
       "__resolveType": "website/sections/Rendering/Lazy.tsx",
       "section": {
         "__resolveType": "site/sections/PrimeiraConversaoLP.tsx",
-        "googleSheetsWebhook": "https://script.google.com/macros/s/AKfycbzZLefXKuAQcciAIvMNczY3SYeUvqFPVSoKyg6Pd5Y9iO3ZArE_XCLRTM6OT_7DtJAv-A/exec",
+        "googleSheetsWebhook": "https://script.google.com/macros/s/AKfycbz4eR0aDZRXtmaeWNj6esYC1VQYV-ZMO9jtcmbbzxe3Ad0Q8JZOR9H7ZDME2nRTx06Tuw/exec",
         "spotifyLink": "https://open.spotify.com/show/4WDU2353Vy8BSBU2C9uSyZ",
         "titlePart1": "PRIMEIRA",
         "titlePart2": "CONVERSÃO",
