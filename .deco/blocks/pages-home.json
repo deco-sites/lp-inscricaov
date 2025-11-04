@@ -6,7 +6,6 @@
       "__resolveType": "website/sections/Rendering/Lazy.tsx",
       "section": {
         "__resolveType": "site/sections/PrimeiraConversaoLP.tsx",
-        "googleSheetsWebhook": "https://script.google.com/macros/s/AKfycbymuLEkpyBD9EMdzek-tosze_TqzlIJ8u3-3myKnREIxOVJME6hgGBZe1zVj5LMymnWkA/exec",
         "spotifyLink": "https://open.spotify.com/show/4WDU2353Vy8BSBU2C9uSyZ",
         "titlePart1": "PRIMEIRA",
         "titlePart2": "CONVERSÃO",
@@ -22,7 +21,8 @@
         "formSubtitle": "Cadastre-se gratuitamente e fique por dentro do mundo digital",
         "labelName": "Nome completo",
         "footerText2": "Seu jornal diário do mundi digital",
-        "footerText1": "© 2025 Primeira Conversão. Todos os direitos reservados."
+        "footerText1": "© 2025 Primeira Conversão. Todos os direitos reservados.",
+        "googleSheetsWebhook": "https://script.google.com/macros/s/AKfycbwy2fvXpTBuR1InjjT2eiweGNERMcFyfj_cw8N4MQAsWdyr_Y0O1sGNey_IQ9nNJkQ_/exec"
       }
     }
   ],
