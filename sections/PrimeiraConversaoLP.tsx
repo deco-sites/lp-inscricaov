@@ -152,7 +152,7 @@ export default function PrimeiraConversaoLP({
             <img 
               src={logo} 
               alt="Logo" 
-              class="w-32 h-32 object-contain"
+              class="w-20 h-20 object-contain"
             />
           )}
         </div>
