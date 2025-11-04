@@ -1,5 +1,6 @@
 import { useSection } from "@deco/deco/hooks";
 import type { ImageWidget } from "apps/admin/widgets.ts";
+import { invoke } from "../runtime.ts";
 
 export interface Props {
   /** @title Título Principal (parte 1) */
@@ -80,39 +81,42 @@ export interface Props {
   /** @title Texto do Footer (linha 2) */
   footerText2?: string;
   
-  /** @title URL do Google Sheets Webhook */
+  /** @title URL do Google Sheets Webhook (opcional) */
+  /** @description Se preenchido, também enviará os dados para o Google Sheets */
   googleSheetsWebhook?: string;
 }
 
-export default function PrimeiraConversaoLP({
-  titlePart1 = "PRIMEIRA",
-  titlePart2 = "CONVERSÃO",
-  subtitle = "Seu jornal diário do mundo digital",
-  subText = "Todo dia útil às 04h00 na sua caixa de entrada",
-  card1Title = "Todo dia às 04h",
-  card1Description = "Comece o dia informado com as principais notícias",
-  card2Title = "Podcast 5 minutos",
-  card2Description = "Ouça no Spotify enquanto se prepara para o dia",
-  card3Title = "Newsletter diária",
-  card3Description = "Receba diretamente no seu e-mail",
-  formTitle = "Receba a newsletter",
-  formSubtitle = "Cadastre-se gratuitamente e fique por dentro do mundo digital",
-  labelName = "Nome completo",
-  placeholderName = "Seu nome",
-  labelEmail = "E-mail",
-  placeholderEmail = "seu@email.com",
-  labelWhatsApp = "WhatsApp",
-  placeholderWhatsApp = "(00) 00000-0000",
-  radioText = "Aceito receber comunicações do Primeira Conversão e seus parceiros via e-mail e WhatsApp",
-  buttonText = "Quero receber a newsletter",
-  spotifyTitle = "Também disponível no Spotify",
-  spotifyDescription = "Ouça o podcast diário de 5 minutos com as principais notícias",
-  spotifyButtonText = "Ouvir no Spotify",
-  spotifyLink = "https://open.spotify.com/",
-  footerText1 = "© 2025 Primeira Conversão. Todos os direitos reservados.",
-  footerText2 = "Seu jornal diário do mundo digital • Das úteis às 04h",
-  googleSheetsWebhook = "",
-}: Props) {
+export default function PrimeiraConversaoLP(props: Props) {
+  const {
+    titlePart1 = "PRIMEIRA",
+    titlePart2 = "CONVERSÃO",
+    subtitle = "Seu jornal diário do mundo digital",
+    subText = "Todo dia útil às 04h00 na sua caixa de entrada",
+    card1Title = "Todo dia às 04h",
+    card1Description = "Comece o dia informado com as principais notícias",
+    card2Title = "Podcast 5 minutos",
+    card2Description = "Ouça no Spotify enquanto se prepara para o dia",
+    card3Title = "Newsletter diária",
+    card3Description = "Receba diretamente no seu e-mail",
+    formTitle = "Receba a newsletter",
+    formSubtitle = "Cadastre-se gratuitamente e fique por dentro do mundo digital",
+    labelName = "Nome completo",
+    placeholderName = "Seu nome",
+    labelEmail = "E-mail",
+    placeholderEmail = "seu@email.com",
+    labelWhatsApp = "WhatsApp",
+    placeholderWhatsApp = "(00) 00000-0000",
+    radioText = "Aceito receber comunicações do Primeira Conversão e seus parceiros via e-mail e WhatsApp",
+    buttonText = "Quero receber a newsletter",
+    spotifyTitle = "Também disponível no Spotify",
+    spotifyDescription = "Ouça o podcast diário de 5 minutos com as principais notícias",
+    spotifyButtonText = "Ouvir no Spotify",
+    spotifyLink = "https://open.spotify.com/",
+    footerText1 = "© 2025 Primeira Conversão. Todos os direitos reservados.",
+    footerText2 = "Seu jornal diário do mundo digital • Das úteis às 04h",
+    googleSheetsWebhook = "",
+  } = props;
+
   return (
     <div class="min-h-screen bg-[#0d1117] text-white">
       {/* Header */}
@@ -209,7 +213,7 @@ export default function PrimeiraConversaoLP({
 
             <form
               class="space-y-5"
-              hx-post={useSection({ props: { googleSheetsWebhook } })}
+              hx-post={useSection({ props })}
               hx-swap="outerHTML"
               hx-target="closest form"
             >
@@ -343,100 +347,108 @@ export const action = async (props: Props, req: Request) => {
   const name = form.get("name")?.toString() || "";
   const email = form.get("email")?.toString() || "";
   const whatsapp = form.get("whatsapp")?.toString() || "";
-  const terms = form.get("terms")?.toString() === "accepted" ? "Sim" : "Não";
-  const timestamp = new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
+  const terms = form.get("terms")?.toString() || "";
 
-  console.log("=== INÍCIO DO ENVIO ===");
+  console.log("=== PROCESSANDO INSCRIÇÃO ===");
   console.log("📝 Nome:", name);
   console.log("📝 Email:", email);
   console.log("📝 WhatsApp:", whatsapp);
   console.log("📝 Termos:", terms);
-  console.log("📝 Timestamp:", timestamp);
-  console.log("🔗 Webhook:", props.googleSheetsWebhook);
 
-  let success = false;
-  let errorMessage = "";
+  try {
+    // Salva usando a Action (mais seguro, sem passar dados via URL)
+    const result = await invoke["site"].actions.saveNewsletterSubscription({
+      name,
+      email,
+      whatsapp,
+      terms,
+    });
 
-  if (!name || !email || !whatsapp) {
-    errorMessage = "Preencha todos os campos";
-    console.error("❌ Campos vazios");
-  } else if (!props.googleSheetsWebhook) {
-    errorMessage = "Webhook não configurado";
-    console.error("❌ Webhook não configurado");
-  } else {
-    try {
-      console.log("📤 Enviando...");
-      
-      const payload = { name, email, whatsapp, terms, timestamp };
-      console.log("📦 Payload:", JSON.stringify(payload));
-      
-      const response = await fetch(props.googleSheetsWebhook, {
-        method: "POST",
-        redirect: "follow",
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify(payload),
-      });
+    console.log("🔍 Resultado da Action:", result);
 
-      console.log("📡 Status:", response.status);
-      
-      if (response.status === 200 || response.status === 302) {
-        success = true;
-        console.log("✅ Sucesso!");
-      } else {
-        errorMessage = `Erro HTTP ${response.status}`;
-        console.error("❌ Erro:", response.status);
+    // Se tiver webhook do Google Sheets configurado, envia também
+    if (props.googleSheetsWebhook && result.success) {
+      console.log("📤 Enviando também para Google Sheets...");
+      try {
+        const timestamp = new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
+        const payload = {
+          name,
+          email,
+          whatsapp,
+          terms: terms === "accepted" ? "Sim" : "Não",
+          timestamp,
+        };
+        
+        await fetch(props.googleSheetsWebhook, {
+          method: "POST",
+          redirect: "follow",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(payload),
+        });
+        
+        console.log("✅ Enviado para Google Sheets");
+      } catch (err) {
+        console.error("⚠️ Erro ao enviar para Google Sheets (mas dados foram salvos):", err);
       }
-      
-    } catch (error) {
-      console.error("❌ Erro:", error);
-      errorMessage = error instanceof Error ? error.message : "Erro desconhecido";
     }
-  }
-  
-  console.log("=== FIM ===");
 
-  if (success) {
-    return (
-      <div class="bg-emerald-500/10 border-2 border-emerald-500/30 rounded-2xl p-10 text-center space-y-4">
-        <svg class="w-20 h-20 text-emerald-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-        </svg>
-        <h3 class="text-3xl font-bold text-white">
-          Inscrição confirmada!
-        </h3>
-        <p class="text-gray-300 text-lg">
-          Você receberá nossa newsletter diária às 04h no seu e-mail.
-        </p>
-        <p class="text-gray-400">
-          Bem-vindo(a) ao Primeira Conversão! 🎉
-        </p>
-        <button
-          onclick="window.location.reload()"
-          class="mt-6 bg-emerald-400 hover:bg-emerald-500 text-gray-900 font-bold py-3 px-8 rounded-lg transition"
-        >
-          Fazer Nova Inscrição
-        </button>
-      </div>
-    );
-  } else {
+    if (result.success) {
+      return (
+        <div class="bg-emerald-500/10 border-2 border-emerald-500/30 rounded-2xl p-10 text-center space-y-4">
+          <svg class="w-20 h-20 text-emerald-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <h3 class="text-3xl font-bold text-white">
+            Inscrição confirmada!
+          </h3>
+          <p class="text-gray-300 text-lg">
+            Você receberá nossa newsletter diária às 04h no seu e-mail.
+          </p>
+          <p class="text-gray-400">
+            Bem-vindo(a) ao Primeira Conversão! 🎉
+          </p>
+          <button
+            onclick="window.location.reload()"
+            class="mt-6 bg-emerald-400 hover:bg-emerald-500 text-gray-900 font-bold py-3 px-8 rounded-lg transition"
+          >
+            Fazer Nova Inscrição
+          </button>
+        </div>
+      );
+    } else {
+      return (
+        <div class="bg-red-500/10 border-2 border-red-500/30 rounded-2xl p-10 text-center space-y-4">
+          <svg class="w-20 h-20 text-red-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <h3 class="text-3xl font-bold text-white">
+            Erro na inscrição
+          </h3>
+          <p class="text-gray-300 text-lg">
+            {result.message}
+          </p>
+          <button
+            onclick="window.location.reload()"
+            class="mt-6 bg-red-400 hover:bg-red-500 text-white font-bold py-3 px-8 rounded-lg transition"
+          >
+            Tentar Novamente
+          </button>
+        </div>
+      );
+    }
+  } catch (error) {
+    console.error("❌ Erro:", error);
     return (
       <div class="bg-red-500/10 border-2 border-red-500/30 rounded-2xl p-10 text-center space-y-4">
         <svg class="w-20 h-20 text-red-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
         </svg>
         <h3 class="text-3xl font-bold text-white">
-          Erro no envio
+          Erro no sistema
         </h3>
-        <p class="text-gray-300 text-lg">
-          {errorMessage || "Não foi possível processar sua inscrição"}
+        <p class="text-gray-300">
+          Ocorreu um erro ao processar sua inscrição. Tente novamente.
         </p>
-        <div class="text-left bg-gray-900/50 p-4 rounded-lg text-xs text-gray-400 max-w-md mx-auto">
-          <p class="font-bold mb-2">Debug:</p>
-          <p>Nome: {name || "vazio"}</p>
-          <p>Email: {email || "vazio"}</p>
-          <p>WhatsApp: {whatsapp || "vazio"}</p>
-          <p>Webhook: {props.googleSheetsWebhook ? "configurado" : "NÃO configurado"}</p>
-        </div>
         <button
           onclick="window.location.reload()"
           class="mt-6 bg-red-400 hover:bg-red-500 text-white font-bold py-3 px-8 rounded-lg transition"

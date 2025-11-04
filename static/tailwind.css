@@ -3022,9 +3022,6 @@ input.tab:checked + .tab-content,
 .bg-emerald-600\/20 {
   background-color: rgb(5 150 105 / 0.2);
 }
-.bg-gray-900\/50 {
-  background-color: rgb(17 24 39 / 0.5);
-}
 .bg-green-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(240 253 244 / var(--tw-bg-opacity));
