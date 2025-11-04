@@ -153,7 +153,7 @@ export default function PrimeiraConversaoLP({
               <img 
                 src={logo} 
                 alt="Logo" 
-                class="w-16 h-16 object-contain"
+                class="w-30 h-30 object-contain"
               />
             ) : (
               <svg class="w-10 h-10 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
