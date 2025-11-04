@@ -7,7 +7,22 @@
       "section": {
         "__resolveType": "site/sections/PrimeiraConversaoLP.tsx",
         "googleSheetsWebhook": "https://script.google.com/macros/s/AKfycbzZLefXKuAQcciAIvMNczY3SYeUvqFPVSoKyg6Pd5Y9iO3ZArE_XCLRTM6OT_7DtJAv-A/exec",
-        "spotifyLink": "https://open.spotify.com/show/4WDU2353Vy8BSBU2C9uSyZ"
+        "spotifyLink": "https://open.spotify.com/show/4WDU2353Vy8BSBU2C9uSyZ",
+        "titlePart1": "PRIMEIRA",
+        "titlePart2": "CONVERSÃO",
+        "subtitle": "Seu jornal diário do mundo digital",
+        "subText": "Todo dia útil pela manhã na sua caixa de entrada e no Spotify",
+        "card1Title": "Todo dia pela manhã",
+        "card1Description": "Comece o dia informado com as principais notícias do mercado digital",
+        "card2Title": "Podcast de 5 minutos",
+        "card2Description": "Ouça no Spotify enquanto se prepara para o dia",
+        "card3Title": "Newsletter diária",
+        "card3Description": "Receba diariamente no seu e-mail",
+        "formTitle": "Receba a newsletter",
+        "formSubtitle": "Cadastre-se gratuitamente e fique por dentro do mundo digital",
+        "labelName": "Nome completo",
+        "footerText2": "Seu jornal diário do mundi digital",
+        "footerText1": "© 2025 Primeira Conversão. Todos os direitos reservados."
       }
     }
   ],
