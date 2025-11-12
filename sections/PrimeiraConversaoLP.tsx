@@ -293,7 +293,7 @@ export default function PrimeiraConversaoLP({
           
           {/* Desenvolvido por TEC4U */}
           <div class="flex items-center justify-center gap-2 text-gray-500 text-xs">
-            <span>Desenvolvido por</span>
+
             <a 
               href="https://www.tec4udigital.com/" 
               target="_blank" 
