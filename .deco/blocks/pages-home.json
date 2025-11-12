@@ -3,6 +3,10 @@
   "path": "/",
   "sections": [
     {
+      "__resolveType": "site/sections/GoogleTagManager.tsx",
+      "containerId": "GTM-XXXXXXX"
+    },
+    {
       "__resolveType": "website/sections/Rendering/Lazy.tsx",
       "section": {
         "__resolveType": "site/sections/PrimeiraConversaoLP.tsx",

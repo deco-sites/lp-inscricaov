@@ -7,18 +7,20 @@ import * as $$$$$$$$$1 from "./actions/submitNewsletter.ts";
 import * as $$$$$$$$$$$0 from "./apps/deco/htmx.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
 import * as $$$$$$0 from "./sections/Footer.tsx";
-import * as $$$$$$1 from "./sections/ItWorks.tsx";
-import * as $$$$$$2 from "./sections/LandingPage.tsx";
-import * as $$$$$$3 from "./sections/PrimeiraConversaoLP.tsx";
-import * as $$$$$$4 from "./sections/Theme/Theme.tsx";
+import * as $$$$$$1 from "./sections/GoogleTagManager.tsx";
+import * as $$$$$$2 from "./sections/ItWorks.tsx";
+import * as $$$$$$3 from "./sections/LandingPage.tsx";
+import * as $$$$$$4 from "./sections/PrimeiraConversaoLP.tsx";
+import * as $$$$$$5 from "./sections/Theme/Theme.tsx";
 
 const manifest = {
   "sections": {
     "site/sections/Footer.tsx": $$$$$$0,
-    "site/sections/ItWorks.tsx": $$$$$$1,
-    "site/sections/LandingPage.tsx": $$$$$$2,
-    "site/sections/PrimeiraConversaoLP.tsx": $$$$$$3,
-    "site/sections/Theme/Theme.tsx": $$$$$$4,
+    "site/sections/GoogleTagManager.tsx": $$$$$$1,
+    "site/sections/ItWorks.tsx": $$$$$$2,
+    "site/sections/LandingPage.tsx": $$$$$$3,
+    "site/sections/PrimeiraConversaoLP.tsx": $$$$$$4,
+    "site/sections/Theme/Theme.tsx": $$$$$$5,
   },
   "actions": {
     "site/actions/saveNewsletterSubscription.ts": $$$$$$$$$0,
