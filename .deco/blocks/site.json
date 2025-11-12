@@ -16,7 +16,7 @@
     },
     {
       "__resolveType": "site/sections/GoogleTagManager.tsx",
-      "trackingId": "GTM-TQGX8DMG"
+      "trackingId": "GTM-W4T566MN"
     }
   ],
   "routes": [
@@ -34,5 +34,19 @@
   "firstByteThresholdMS": true,
   "theme": {
     "__resolveType": "Neutral"
-  }
+  },
+  "abTesting": {
+    "replaces": [],
+    "includeScriptsToHead": {
+      "includes": []
+    },
+    "includeScriptsToBody": {
+      "includes": []
+    }
+  },
+  "flavor": {
+    "framework": "fresh"
+  },
+  "whilelistURLs": [],
+  "whitelistPatterns": []
 }
