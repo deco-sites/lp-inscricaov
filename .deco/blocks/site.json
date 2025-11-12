@@ -15,7 +15,8 @@
       "__resolveType": "htmx/sections/htmx.tsx"
     },
     {
-      "__resolveType": "site-GoogleTagManager-global.json"
+      "__resolveType": "site/sections/GoogleTagManager.tsx",
+      "trackingId": "GTM-TQGX8DMG"
     }
   ],
   "routes": [
