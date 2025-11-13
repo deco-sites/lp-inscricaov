@@ -1,5 +1,5 @@
 {
   "__resolveType": "site/sections/Theme/Favicon.tsx",
-  "faviconSvg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🎓</text></svg>",
+  "faviconSvg": "<p><img src=\"https://assets.decocache.com/lp-inscricaov/7f2a0c9f-b38e-44da-89a5-23e2ca4ae446/3.svg\"></p>",
   "faviconPng": ""
 }
