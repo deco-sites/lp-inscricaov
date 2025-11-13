@@ -11,7 +11,8 @@ import * as $$$$$$1 from "./sections/GoogleTagManager.tsx";
 import * as $$$$$$2 from "./sections/ItWorks.tsx";
 import * as $$$$$$3 from "./sections/LandingPage.tsx";
 import * as $$$$$$4 from "./sections/PrimeiraConversaoLP.tsx";
-import * as $$$$$$5 from "./sections/Theme/Theme.tsx";
+import * as $$$$$$5 from "./sections/Theme/Favicon.tsx";
+import * as $$$$$$6 from "./sections/Theme/Theme.tsx";
 
 const manifest = {
   "sections": {
@@ -20,7 +21,8 @@ const manifest = {
     "site/sections/ItWorks.tsx": $$$$$$2,
     "site/sections/LandingPage.tsx": $$$$$$3,
     "site/sections/PrimeiraConversaoLP.tsx": $$$$$$4,
-    "site/sections/Theme/Theme.tsx": $$$$$$5,
+    "site/sections/Theme/Favicon.tsx": $$$$$$5,
+    "site/sections/Theme/Theme.tsx": $$$$$$6,
   },
   "actions": {
     "site/actions/saveNewsletterSubscription.ts": $$$$$$$$$0,
