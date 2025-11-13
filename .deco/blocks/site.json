@@ -17,6 +17,12 @@
     {
       "__resolveType": "site/sections/GoogleTagManager.tsx",
       "trackingId": "GTM-W4T566MN"
+    },
+    {
+      "__resolveType": "website/sections/Rendering/Lazy.tsx",
+      "section": {
+        "__resolveType": "site-Favicon-global"
+      }
     }
   ],
   "routes": [
