@@ -3,29 +3,33 @@
   "path": "/",
   "sections": [
     {
-      "__resolveType": "website/sections/Rendering/Lazy.tsx",
-      "section": {
-        "__resolveType": "site/sections/PrimeiraConversaoLP.tsx",
-        "spotifyLink": "https://open.spotify.com/show/4WDU2353Vy8BSBU2C9uSyZ",
-        "titlePart1": "PRIMEIRA",
-        "titlePart2": "CONVERSÃO",
-        "subtitle": "Seu jornal diário do mundo digital",
-        "subText": "Todo dia útil pela manhã na sua caixa de entrada e no Spotify",
-        "card1Title": "Todo dia pela manhã",
-        "card1Description": "Comece o dia informado com as principais notícias do mercado digital",
-        "card2Title": "Podcast de 5 minutos",
-        "card2Description": "Ouça no Spotify enquanto se prepara para o dia",
-        "card3Title": "Newsletter diária",
-        "card3Description": "Receba diariamente no seu e-mail",
-        "formTitle": "Receba a newsletter",
-        "formSubtitle": "Cadastre-se gratuitamente e fique por dentro do mundo digital",
-        "labelName": "Nome completo",
-        "footerText2": "Seu jornal diário do mundo digital",
-        "footerText1": "© 2025 Primeira Conversão. Todos os direitos reservados.",
-        "googleSheetsWebhook": "https://script.google.com/macros/s/AKfycbwy2fvXpTBuR1InjjT2eiweGNERMcFyfj_cw8N4MQAsWdyr_Y0O1sGNey_IQ9nNJkQ_/exec",
-        "successTitle": "Inscrição confirmada!",
-        "successDescription": "Você receberá nossa newsletter diária no seu e-mail."
-      }
+      "__resolveType": "site/sections/SimpleHeader.tsx",
+      "logo": "https://assets.decocache.com/lp-inscricaov/bcceadf7-f949-44ed-970b-31a87f4ae21c/Black-Yellow-Bold-Modern-Podcast-YouTube-Channel-Logo.png",
+      "alt": "Logo primeira conversão",
+      "width": 200,
+      "height": 200
+    },
+    {
+      "__resolveType": "site/sections/PrimeiraConversaoLP.tsx",
+      "spotifyLink": "https://open.spotify.com/show/4WDU2353Vy8BSBU2C9uSyZ",
+      "titlePart1": "PRIMEIRA",
+      "titlePart2": "CONVERSÃO",
+      "subtitle": "Seu jornal diário do mundo digital",
+      "subText": "Todo dia útil pela manhã na sua caixa de entrada e no Spotify",
+      "card1Title": "Todo dia pela manhã",
+      "card1Description": "Comece o dia informado com as principais notícias do mercado digital",
+      "card2Title": "Podcast de 5 minutos",
+      "card2Description": "Ouça no Spotify enquanto se prepara para o dia",
+      "card3Title": "Newsletter diária",
+      "card3Description": "Receba diariamente no seu e-mail",
+      "formTitle": "Receba a newsletter",
+      "formSubtitle": "Cadastre-se gratuitamente e fique por dentro do mundo digital",
+      "labelName": "Nome completo",
+      "footerText2": "Seu jornal diário do mundo digital",
+      "footerText1": "© 2025 Primeira Conversão. Todos os direitos reservados.",
+      "googleSheetsWebhook": "https://script.google.com/macros/s/AKfycbwy2fvXpTBuR1InjjT2eiweGNERMcFyfj_cw8N4MQAsWdyr_Y0O1sGNey_IQ9nNJkQ_/exec",
+      "successTitle": "Inscrição confirmada!",
+      "successDescription": "Você receberá nossa newsletter diária no seu e-mail."
     }
   ],
   "__resolveType": "website/pages/Page.tsx"

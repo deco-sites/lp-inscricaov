@@ -145,19 +145,6 @@ export default function PrimeiraConversaoLP({
 }: Props) {
   return (
     <div class="min-h-screen bg-[#0d1117] text-white">
-      {/* Header */}
-      <header class="pt-12 pb-8">
-        <div class="container mx-auto px-4 flex justify-center">
-          {logo && (
-            <img 
-              src={logo} 
-              alt="Logo" 
-              class="w-20 h-20 object-contain"
-            />
-          )}
-        </div>
-      </header>
-
       {/* Hero Section */}
       <section class="py-6 text-center">
         <div class="container mx-auto px-4">
