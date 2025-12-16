@@ -109,8 +109,8 @@ export interface Props {
 
 export default function PrimeiraConversaoLP({
   logo,
-  titlePart1 = "PRIMEIRA",
-  titlePart2 = "CONVERSÃO",
+  titlePart1,
+  titlePart2,
   subtitle = "Seu jornal diário do mundo digital",
   subText = "Todo dia útil às 04h00 na sua caixa de entrada",
   card1Title = "Todo dia às 04h",
@@ -148,10 +148,12 @@ export default function PrimeiraConversaoLP({
       {/* Hero Section */}
       <section class="py-6 text-center">
         <div class="container mx-auto px-4">
+      {titlePart1 && titlePart2 &&
           <h1 class="text-6xl md:text-7xl lg:text-8xl font-bold mb-6 leading-none">
             {titlePart1}<br />
             <span class="text-[#4ade80]">{titlePart2}</span>
           </h1>
+      }
           <p class="text-xl md:text-2xl text-gray-100 mb-2 font-medium">
             {subtitle}
           </p>
